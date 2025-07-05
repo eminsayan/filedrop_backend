@@ -1,11 +1,12 @@
 package com.filedrop.backend.model;
 
-import com.filedrop.backend.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.UUID;
+
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,8 +15,8 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Todo: UUID tipinde olsun id'ler
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id; // Todo: UUID tipinde olsun id'ler
 
     @Column(unique = true, nullable = false)
     private String username;
@@ -23,6 +24,4 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
 }

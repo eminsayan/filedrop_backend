@@ -1,11 +1,11 @@
 package com.filedrop.backend.service;
 
-import com.filedrop.backend.dto.RegisterRequest;
-import com.filedrop.backend.enums.Role;
+import com.filedrop.backend.dto.UserDto;
+import com.filedrop.backend.mapper.UserMapper;
 import com.filedrop.backend.model.User;
 import com.filedrop.backend.repository.UserRepository;
+import com.filedrop.backend.resource.UserResource;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,20 +13,14 @@ import org.springframework.stereotype.Service;
 public class AuthService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
-    public void Register(RegisterRequest request){
+    public UserResource register(UserDto request) {
 
-        if (userRepository.findByUsername(request.getUsername()) != null){
-            throw new RuntimeException("Kullanıcı zaten var!");
-        }
-
-        var user = User.builder()
-                .username(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.ROLE_USER)
-                .build();
+        User user = userMapper.toEntity(request);
 
         userRepository.save(user);
+
+        return userMapper.toResource(user);
     }
 }
