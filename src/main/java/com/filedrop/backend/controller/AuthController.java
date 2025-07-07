@@ -18,7 +18,6 @@ public class AuthController {
 
     @PostMapping("/register")
     public UserResource register(@RequestBody UserDto request) {
-
         return authService.register(request);
     }
 }
