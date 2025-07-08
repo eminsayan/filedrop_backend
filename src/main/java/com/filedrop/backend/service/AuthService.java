@@ -23,4 +23,16 @@ public class AuthService {
 
         return userMapper.toResource(user);
     }
+
+
+    public UserResource login(UserDto userDto) {
+        User user = userRepository.findByUsername(userDto.getUsername())
+                .orElseThrow(() -> new RuntimeException("Kullanici bulunamadi: " + userDto.getUsername()));
+
+        if (!user.getPassword().equals(userDto.getPassword())) {
+            throw new RuntimeException("sifre hatalı");
+        }
+
+        return userMapper.toResource(user);
+    }
 }

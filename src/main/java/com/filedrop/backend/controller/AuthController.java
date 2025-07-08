@@ -17,7 +17,12 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public UserResource register(@RequestBody UserDto request) {
-        return authService.register(request);
+    public UserResource register(@RequestBody UserDto userDto) {
+        return authService.register(userDto);
+    }
+
+    @PostMapping("/login")
+    public UserResource login(@RequestBody UserDto userDto){
+        return authService.login(userDto);
     }
 }
