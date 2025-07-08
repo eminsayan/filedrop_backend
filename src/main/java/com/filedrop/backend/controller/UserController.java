@@ -17,17 +17,17 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public UserResource CreateUser(UserDto userdto){
+    public UserResource CreateUser(@RequestBody UserDto userdto){
        return userService.CreateUser(userdto);
     }
 
     @GetMapping("/{id}")
-    public UserResource getUserById(UUID id){
+    public UserResource getUserById(@PathVariable UUID id){//5956125e-5861-486b-84c3-a3cd494a4d88
         return userService.getUserById(id);
     }
 
     @GetMapping("/username/{username}")
-    public UserResource getUserByUsername(String username){
+    public UserResource getUserByUsername(@PathVariable String username){
         return userService.getUserByUsername(username);
     }
 
@@ -37,12 +37,12 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public UserResource updateUser(UUID id, UserDto dto){
+    public UserResource updateUser(@PathVariable UUID id, @RequestBody UserDto dto){//093ba96f-002b-44f0-8597-b6d7da6a7cb6
         return userService.updateUser(id, dto);
     }
 
     @DeleteMapping("/{id}")
-    public UserResource deleteUser(UUID id){
+    public UserResource deleteUser(@PathVariable UUID id){
         return userService.deleteUser(id);
     }
 
