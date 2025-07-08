@@ -1,4 +1,4 @@
-package com.filedrop.backend.resource;
+package com.filedrop.backend.controller.resource;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

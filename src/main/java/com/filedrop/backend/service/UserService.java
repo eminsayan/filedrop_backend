@@ -1,15 +1,14 @@
 package com.filedrop.backend.service;
 
-import com.filedrop.backend.dto.UserDto;
-import com.filedrop.backend.mapper.UserMapper;
+import com.filedrop.backend.controller.dto.UserDto;
+import com.filedrop.backend.controller.mapper.UserMapper;
 import com.filedrop.backend.model.User;
 import com.filedrop.backend.repository.UserRepository;
-import com.filedrop.backend.resource.UserResource;
+import com.filedrop.backend.controller.resource.UserResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ public class UserService {
     private final UserMapper userMapper;
 
 
-    // CREATE
+    // CREATE // Todo (MK): bu yorum satırlarına gerek yok, zaten metot isimleri var
     public UserResource CreateUser(UserDto userdto) {
         User user = userMapper.toEntity(userdto);
         userRepository.save(user);

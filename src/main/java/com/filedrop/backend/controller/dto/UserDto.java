@@ -1,4 +1,4 @@
-package com.filedrop.backend.dto;
+package com.filedrop.backend.controller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

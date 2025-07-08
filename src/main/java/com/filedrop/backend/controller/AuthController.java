@@ -1,7 +1,7 @@
 package com.filedrop.backend.controller;
 
-import com.filedrop.backend.dto.UserDto;
-import com.filedrop.backend.resource.UserResource;
+import com.filedrop.backend.controller.dto.UserDto;
+import com.filedrop.backend.controller.resource.UserResource;
 import com.filedrop.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +18,8 @@ public class AuthController {
 
     @PostMapping("/register")
     public UserResource register(@RequestBody UserDto userDto) {
+        // Todo (MK): dto nesnelerinin çevrimini burada yapalım, Servis katmanı dto ve resource ile ilgilenmesin,
+        //  entity ile ilgilensin. Dto ve Resource'lar dışarıdan alırken ve dışarıya dönerken kullandığımız modeller
         return authService.register(userDto);
     }
 

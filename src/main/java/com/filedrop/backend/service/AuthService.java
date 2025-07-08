@@ -1,10 +1,10 @@
 package com.filedrop.backend.service;
 
-import com.filedrop.backend.dto.UserDto;
-import com.filedrop.backend.mapper.UserMapper;
+import com.filedrop.backend.controller.dto.UserDto;
+import com.filedrop.backend.controller.mapper.UserMapper;
 import com.filedrop.backend.model.User;
 import com.filedrop.backend.repository.UserRepository;
-import com.filedrop.backend.resource.UserResource;
+import com.filedrop.backend.controller.resource.UserResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,8 @@ public class AuthService {
 
         userRepository.save(user);
 
+        // Todo (MK): servis metotlarından entity dönsün. resource çevirimini controller
+        // Todo (MK): katmanında yapalım (bu todo'yu da silersin)
         return userMapper.toResource(user);
     }
 
