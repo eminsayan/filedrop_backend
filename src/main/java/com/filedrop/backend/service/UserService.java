@@ -17,61 +17,46 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserMapper userMapper;
 
 
-    // CREATE // Todo (MK): bu yorum satırlarına gerek yok, zaten metot isimleri var
-    public UserResource CreateUser(UserDto userdto) {
-        User user = userMapper.toEntity(userdto);
-        userRepository.save(user);
-
-        return userMapper.toResource(user);
+    public User createUser(User user) {
+        return userRepository.save(user);
     }
 
-    // READ  ID'ye göre
-    public UserResource getUserById(UUID id) {
+    public User getUserById(UUID id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı id: " + id));
 
-        return userMapper.toResource(user);
+        return user;
     }
 
-    // READ  Kullanıcı adına göre
-    public UserResource getUserByUsername(String username) {
+    public User getUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı username: " + username));
-        return userMapper.toResource(user);
+        return user;
     }
 
-    // READ Tüm kullanıcıları listeler
-    public List<UserResource> getAllUsers() {
+    public List<User> getAllUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream()
-                .map(userMapper::toResource)
-                .collect(Collectors.toList());
+        return users;
     }
 
-    // UPDATE
-    public UserResource updateUser(UUID id, UserDto dto) {
+    public User updateUser(UUID id, User user) {
         return userRepository.findById(id)
                 .map(existingUser -> {
-                    existingUser.setUsername(dto.getUsername());
-                    existingUser.setPassword(dto.getPassword());
-                    userRepository.save(existingUser);
+                    existingUser.setUsername(user.getUsername());
+                    existingUser.setPassword(user.getPassword());
 
-                    UserResource resource = userMapper.toResource(existingUser);
-
-                    return resource;
+                    return userRepository.save(existingUser);
                 })
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı id: " + id));
     }
 
-    // DELETE
-    public UserResource deleteUser(UUID id) {
+    public User deleteUser(UUID id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Kullanıcı bulunamadı id: " + id));
         userRepository.deleteById(id);
-        return userMapper.toResource(user);
+        return user;
     }
 
 }

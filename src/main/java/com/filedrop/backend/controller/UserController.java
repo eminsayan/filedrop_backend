@@ -1,13 +1,16 @@
 package com.filedrop.backend.controller;
 
 import com.filedrop.backend.controller.dto.UserDto;
+import com.filedrop.backend.controller.mapper.UserMapper;
 import com.filedrop.backend.controller.resource.UserResource;
+import com.filedrop.backend.model.User;
 import com.filedrop.backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/user")
@@ -15,39 +18,48 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
-
-    // Todo (MK): CTRL + Alt + L kombinasyonu format yapar, bu kez ben yapıyorum ama sen de kullan
+    private final UserMapper userMapper;
 
     @PostMapping
-    public UserResource CreateUser(@RequestBody UserDto userdto) {
-        // Todo (MK): metot ismi büyük olmaz
-        return userService.CreateUser(userdto);
+    public UserResource createUser(@RequestBody UserDto userdto) {
+        User user = userMapper.toEntity(userdto);
+        User createdUser = userService.createUser(user);
+        return userMapper.toResource(createdUser);
     }
 
     @GetMapping("/{id}")
-    public UserResource getUserById(@PathVariable UUID id) {//5956125e-5861-486b-84c3-a3cd494a4d88
-        return userService.getUserById(id);
+    public UserResource getUserById(@PathVariable UUID id) {
+        User user = userService.getUserById(id);
+        return userMapper.toResource(user);
     }
 
     @GetMapping("/username/{username}")
     public UserResource getUserByUsername(@PathVariable String username) {
-        return userService.getUserByUsername(username);
+        User user = userService.getUserByUsername(username);
+        return userMapper.toResource(user);
     }
 
     @GetMapping
     public List<UserResource> getAllUsers() {
-        return userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
+        return users.stream()
+                .map(userMapper::toResource)
+                .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}")
     public UserResource updateUser(@PathVariable UUID id,
-                                   @RequestBody UserDto dto) { // 093ba96f-002b-44f0-8597-b6d7da6a7cb6
-        return userService.updateUser(id, dto);
+                                   @RequestBody UserDto dto) {
+        User user = userMapper.toEntity(dto);
+        User uptadedUser = userService.updateUser(id,user);
+        return userMapper.toResource(uptadedUser);
     }
 
     @DeleteMapping("/{id}")
     public UserResource deleteUser(@PathVariable UUID id) {
-        return userService.deleteUser(id);
+        User user = userService.deleteUser(id);
+        return userMapper.toResource(user) ;
+
     }
 
 }
