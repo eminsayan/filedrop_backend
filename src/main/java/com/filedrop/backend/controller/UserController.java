@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/user")
 @AllArgsConstructor
 public class UserController {
@@ -51,14 +52,14 @@ public class UserController {
     public UserResource updateUser(@PathVariable UUID id,
                                    @RequestBody UserDto dto) {
         User user = userMapper.toEntity(dto);
-        User uptadedUser = userService.updateUser(id,user);
+        User uptadedUser = userService.updateUser(id, user);
         return userMapper.toResource(uptadedUser);
     }
 
     @DeleteMapping("/{id}")
     public UserResource deleteUser(@PathVariable UUID id) {
         User user = userService.deleteUser(id);
-        return userMapper.toResource(user) ;
+        return userMapper.toResource(user);
 
     }
 
