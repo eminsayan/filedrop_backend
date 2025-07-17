@@ -20,10 +20,12 @@ public class FileService {
 
     private final FileRepository fileRepository;
 
+    // Todo (MK): burada root değerini yml dosyasından alalım (@Value)
     private final Path root = Paths.get("uploads");
 
     public File saveFile(MultipartFile file, User user) {
 
+        // Todo (MK): mimeType ile kontrol etmek daha doğru olabilir. Bunu bir araştırsana hangisi daha doğruymuş (deftere de yazarsın)
         if (!file.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
             throw new RuntimeException("Sadece PDF dosyalar yüklenebilir!");
         }
@@ -39,6 +41,8 @@ public class FileService {
             fileEntity.setFilename(file.getOriginalFilename());
             fileEntity.setFilePath(filePath.toString());
             fileEntity.setUploadedAt(LocalDateTime.now());
+            // Todo (MK): Bu tarz alanların setlenmesi için @PrePersist ve @PreUpdate gibi anotasyonlar kullanılıyor olmalı,
+            //  bir araştırıp kullanmayı dener misin? Ama önce File entity'sine yazdığım nota bak.
             fileEntity.setUser(user);
 
             fileRepository.save(fileEntity);

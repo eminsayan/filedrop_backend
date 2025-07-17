@@ -6,6 +6,8 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+// Todo (MK): Setter gerekmiyor mu burada? Çalışıyor mu bu?
+
 @Getter
 @AllArgsConstructor
 public class FileResource {
