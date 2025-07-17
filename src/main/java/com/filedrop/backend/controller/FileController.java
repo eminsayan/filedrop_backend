@@ -32,8 +32,8 @@ public class FileController {
 
         User user = userService.getUserById(userId);
 
-        File savedFİle = fileService.saveFile(file, user);
-        return fileMapper.toResource(savedFİle);
+        File savedFile = fileService.saveFile(file, user);
+        return fileMapper.toResource(savedFile);
 
     }
 
