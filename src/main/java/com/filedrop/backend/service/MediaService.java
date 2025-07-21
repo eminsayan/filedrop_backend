@@ -4,6 +4,8 @@ import com.filedrop.backend.model.Media;
 import com.filedrop.backend.model.User;
 import com.filedrop.backend.repository.MediaRepository;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,13 +17,17 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 public class MediaService {
 
-    private final MediaRepository fileRepository;
+    private final MediaRepository mediaRepository;
 
-    // Todo (MK): burada root değerini yml dosyasından alalım (@Value)
-    private final Path root = Paths.get("uploads");
+    private final Path root;
+
+    public MediaService(MediaRepository mediaRepository,
+                        @Value("${app.upload.directory}") String uploadDirectory) {
+        this.mediaRepository = mediaRepository;
+        this.root = Paths.get(uploadDirectory);
+    }
 
     public Media saveMedia(MultipartFile media, User user) {
 
@@ -49,7 +55,7 @@ public class MediaService {
             //  bir araştırıp kullanmayı dener misin? Ama önce File entity'sine yazdığım nota bak.
 
 
-            fileRepository.save(mediaEntity);
+            mediaRepository.save(mediaEntity);
 
             return mediaEntity;
         } catch (Exception e) {
@@ -59,6 +65,6 @@ public class MediaService {
     }
 
     public List<Media> getUserMedias(UUID userId) {
-        return fileRepository.findByCreatedBy(userId);
+        return mediaRepository.findByCreatedBy(userId);
     }
 }
