@@ -42,9 +42,7 @@ public class UserController {
     @GetMapping
     public List<UserResource> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        return users.stream()
-                .map(userMapper::toResource)
-                .collect(Collectors.toList());
+        return userMapper.toResourceList(users);
     }
 
     @PutMapping("/{id}")

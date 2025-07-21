@@ -5,7 +5,11 @@ import com.filedrop.backend.model.File;
 import org.mapstruct.Mapper;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface FileMapper {
     FileResource toResource(File file);
+
+    List<FileResource> toResourceList(List<File> files);
 }

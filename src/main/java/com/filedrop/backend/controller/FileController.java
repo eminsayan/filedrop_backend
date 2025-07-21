@@ -38,9 +38,6 @@ public class FileController {
     public List<FileResource> getMyFiles(@RequestParam("userId") UUID userId) {
         List<File> files = fileService.getUserFiles(userId);
 
-        // Todo (MK): listeleri map'lemek için mapstruct'ın yöntemi olmalı, bu kullanım biraz tuhaf geldi
-        return files.stream()
-                .map(fileMapper::toResource)
-                .collect(Collectors.toList());
+        return fileMapper.toResourceList(files);
     }
 }
