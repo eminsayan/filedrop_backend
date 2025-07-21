@@ -34,11 +34,9 @@ public class FileController {
 
     }
 
-    // Todo (MK): my-files olmamalı (user-files veya user/{userId}/files tarzı bir şey daha doğru bir isimlendirme gibi geldi)
-    @GetMapping("/my-files")
+    @GetMapping("/user-files")
     public List<FileResource> getMyFiles(@RequestParam("userId") UUID userId) {
-        User user = userService.getUserById(userId);
-        List<File> files = fileService.getUserFiles(user); // Todo (MK): user'ı tamamen neden veriyoruz, bu metot sadece userId alsa yetmez mi?
+        List<File> files = fileService.getUserFiles(userId);
 
         // Todo (MK): listeleri map'lemek için mapstruct'ın yöntemi olmalı, bu kullanım biraz tuhaf geldi
         return files.stream()

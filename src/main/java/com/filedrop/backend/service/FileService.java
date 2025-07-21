@@ -54,7 +54,7 @@ public class FileService {
 
     }
 
-    public List<File> getUserFiles(User user) {
-        return fileRepository.findByUser(user);
+    public List<File> getUserFiles(UUID userId) {
+        return fileRepository.findByUser_Id(userId);
     }
 }
