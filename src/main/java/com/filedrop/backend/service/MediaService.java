@@ -32,18 +32,22 @@ public class MediaService {
 
         try {
 
-            String medianame = UUID.randomUUID() + "_" + media.getOriginalFilename();
+            String mediaName = UUID.randomUUID() + "_" + media.getOriginalFilename();
 
-            Path mediaPath = this.root.resolve(medianame);
+            Path mediaPath = this.root.resolve(mediaName);
             Files.copy(media.getInputStream(), mediaPath);
 
             Media mediaEntity = new Media();
-            mediaEntity.setMedianame(media.getOriginalFilename());
+            mediaEntity.setMediaName(media.getOriginalFilename());
             mediaEntity.setMediaPath(mediaPath.toString());
-            mediaEntity.setUploadedAt(LocalDateTime.now());
+            mediaEntity.setCreatedDate(LocalDateTime.now());
+            mediaEntity.setCreatedBy(user.getId());
+            mediaEntity.setLastModifiedDate(LocalDateTime.now());
+            mediaEntity.setLastModifiedBy(user.getId());
+
             // Todo (MK): Bu tarz alanların setlenmesi için @PrePersist ve @PreUpdate gibi anotasyonlar kullanılıyor olmalı,
             //  bir araştırıp kullanmayı dener misin? Ama önce File entity'sine yazdığım nota bak.
-            mediaEntity.setUser(user);
+
 
             fileRepository.save(mediaEntity);
 
@@ -55,6 +59,6 @@ public class MediaService {
     }
 
     public List<Media> getUserMedias(UUID userId) {
-        return fileRepository.findByUser_Id(userId);
+        return fileRepository.findByCreatedBy(userId);
     }
 }
