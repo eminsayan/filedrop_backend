@@ -1,10 +1,8 @@
 package com.filedrop.backend.model;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
@@ -29,8 +27,25 @@ public abstract class BaseEntity {
 
     private LocalDateTime createdDate;
 
+    @Nullable
     private UUID lastModifiedBy;
 
+    @Nullable
     private LocalDateTime lastModifiedDate;
 
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
+        // createdBy alanını ayarlamak için burada bir UserContext veya SecurityContext kullanmanız gerekebilir.
+        // Şimdilik null bırakıyorum veya sabit bir değer atıyorum, gerçek uygulamada güvenlik bağlamından alınır.
+        // this.createdBy = getCurrentUserId(); // Örnek: Gerçek bir uygulamada geçerli kullanıcının ID'si alınır
+        // this.lastModifiedBy = getCurrentUserId(); // Örnek
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.lastModifiedDate = LocalDateTime.now();
+        // lastModifiedBy alanını ayarlamak için burada bir UserContext veya SecurityContext kullanmanız gerekebilir.
+        // this.lastModifiedBy = getCurrentUserId(); // Örnek
+    }
 }

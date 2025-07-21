@@ -36,7 +36,7 @@ public class MediaService {
         if (contentType == null || (!contentType.equals("application/pdf") && !contentType.equals("application/x-pdf"))) {
             throw new RuntimeException("Sadece PDF dosyaları yüklenebilir! Geçersiz dosya tipi: " + contentType);
         }
-        
+
         try {
 
             String mediaName = UUID.randomUUID() + "_" + media.getOriginalFilename();
@@ -47,9 +47,7 @@ public class MediaService {
             Media mediaEntity = new Media();
             mediaEntity.setMediaName(media.getOriginalFilename());
             mediaEntity.setMediaPath(mediaPath.toString());
-            mediaEntity.setCreatedDate(LocalDateTime.now());
             mediaEntity.setCreatedBy(user.getId());
-            mediaEntity.setLastModifiedDate(LocalDateTime.now());
             mediaEntity.setLastModifiedBy(user.getId());
 
             // Todo (MK): Bu tarz alanların setlenmesi için @PrePersist ve @PreUpdate gibi anotasyonlar kullanılıyor olmalı,
