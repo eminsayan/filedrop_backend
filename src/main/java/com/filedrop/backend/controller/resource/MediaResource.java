@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
-public class FileResource {
+public class MediaResource {
     private UUID id;
     private String filename;
     private String filePath;

@@ -13,8 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class File {
-    // Todo (MK): Class adını Media yapalım. Javada da File diye bir class var, karışmasın
+public class Media {
     /*
     Todo (MK): Ayrıca şu alanları BaseEntity adında bir class'ta toplayalım ve diğer entity'ler ondan
     miras alsın (böylece kod tekrarı azalır biraz):
@@ -30,8 +29,8 @@ public class File {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private String filename;         // Orijinal dosya adı
-    private String filePath;         // Kaydedildiği yer
+    private String medianame;         // Orijinal dosya adı
+    private String mediaPath;         // Kaydedildiği yer
     private LocalDateTime uploadedAt;
 
     @ManyToOne
