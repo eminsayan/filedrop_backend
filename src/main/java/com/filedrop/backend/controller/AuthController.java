@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 // Todo (MK): CORS sorununu bu şekilde çözmeyelim, daha genel bir çözüm gerekir (config dosyasında)
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
