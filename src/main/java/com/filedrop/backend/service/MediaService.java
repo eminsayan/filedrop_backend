@@ -31,11 +31,12 @@ public class MediaService {
 
     public Media saveMedia(MultipartFile media, User user) {
 
-        // Todo (MK): mimeType ile kontrol etmek daha doğru olabilir. Bunu bir araştırsana hangisi daha doğruymuş (deftere de yazarsın)
-        if (!media.getOriginalFilename().toLowerCase().endsWith(".pdf")) {
-            throw new RuntimeException("Sadece PDF dosyalar yüklenebilir!");
-        }
+        String contentType = media.getContentType();
 
+        if (contentType == null || (!contentType.equals("application/pdf") && !contentType.equals("application/x-pdf"))) {
+            throw new RuntimeException("Sadece PDF dosyaları yüklenebilir! Geçersiz dosya tipi: " + contentType);
+        }
+        
         try {
 
             String mediaName = UUID.randomUUID() + "_" + media.getOriginalFilename();
