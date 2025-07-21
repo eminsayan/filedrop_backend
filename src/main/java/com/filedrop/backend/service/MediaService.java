@@ -50,9 +50,6 @@ public class MediaService {
             mediaEntity.setCreatedBy(user.getId());
             mediaEntity.setLastModifiedBy(user.getId());
 
-            // Todo (MK): Bu tarz alanların setlenmesi için @PrePersist ve @PreUpdate gibi anotasyonlar kullanılıyor olmalı,
-            //  bir araştırıp kullanmayı dener misin? Ama önce File entity'sine yazdığım nota bak.
-
 
             mediaRepository.save(mediaEntity);
 
