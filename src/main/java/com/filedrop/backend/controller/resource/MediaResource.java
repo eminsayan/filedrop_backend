@@ -20,6 +20,7 @@ public class MediaResource {
     private String mediaName;
 
     private String mediaPath;
+    private long mediaSize;
 
     private LocalDateTime createdDate;
 

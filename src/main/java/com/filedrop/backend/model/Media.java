@@ -17,5 +17,6 @@ public class Media extends BaseEntity {
 
     private String mediaName;
     private String mediaPath;
+    private long mediaSize;
 
 }

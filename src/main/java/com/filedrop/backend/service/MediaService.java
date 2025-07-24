@@ -49,6 +49,7 @@ public class MediaService {
             mediaEntity.setMediaPath(mediaPath.toString());
             mediaEntity.setCreatedBy(user.getId());
             mediaEntity.setLastModifiedBy(user.getId());
+            mediaEntity.setMediaSize(media.getSize());
 
 
             mediaRepository.save(mediaEntity);
