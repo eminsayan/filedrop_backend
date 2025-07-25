@@ -20,6 +20,7 @@ public class AuthService {
         User loggedInUser = userRepository.findByUsername(user.getUsername())
                 .orElseThrow(() -> new RuntimeException("Kullanici bulunamadi: " + user.getUsername()));
 
+        // Todo (MK): Burada taraflardan birinin loggedInUser olması gerekmez mi:)
         if (!user.getPassword().equals(user.getPassword())) {
             throw new RuntimeException("sifre hatalı");
         }

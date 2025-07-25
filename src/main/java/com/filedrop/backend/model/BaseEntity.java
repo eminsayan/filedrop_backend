@@ -36,6 +36,7 @@ public abstract class BaseEntity {
     @PrePersist
     protected void onCreate() {
         this.createdDate = LocalDateTime.now();
+        // Todo (MK): Asıl amacımızı tamamladıktan sonra yapılabilir, şimdilik notumuzu almış olalım, yeterli
         // createdBy alanını ayarlamak için burada bir UserContext veya SecurityContext kullanmanız gerekebilir.
         // Şimdilik null bırakıyorum veya sabit bir değer atıyorum, gerçek uygulamada güvenlik bağlamından alınır.
         // this.createdBy = getCurrentUserId(); // Örnek: Gerçek bir uygulamada geçerli kullanıcının ID'si alınır
