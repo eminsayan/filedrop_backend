@@ -42,23 +42,21 @@ public class UserController {
     @GetMapping
     public List<UserResource> getAllUsers() {
         List<User> users = userService.getAllUsers();
-        return users.stream()
-                .map(userMapper::toResource)
-                .collect(Collectors.toList());
+        return userMapper.toResourceList(users);
     }
 
     @PutMapping("/{id}")
     public UserResource updateUser(@PathVariable UUID id,
                                    @RequestBody UserDto dto) {
         User user = userMapper.toEntity(dto);
-        User uptadedUser = userService.updateUser(id,user);
+        User uptadedUser = userService.updateUser(id, user);
         return userMapper.toResource(uptadedUser);
     }
 
     @DeleteMapping("/{id}")
     public UserResource deleteUser(@PathVariable UUID id) {
         User user = userService.deleteUser(id);
-        return userMapper.toResource(user) ;
+        return userMapper.toResource(user);
 
     }
 

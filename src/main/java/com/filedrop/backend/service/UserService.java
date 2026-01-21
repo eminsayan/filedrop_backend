@@ -1,16 +1,12 @@
 package com.filedrop.backend.service;
 
-import com.filedrop.backend.controller.dto.UserDto;
-import com.filedrop.backend.controller.mapper.UserMapper;
 import com.filedrop.backend.model.User;
 import com.filedrop.backend.repository.UserRepository;
-import com.filedrop.backend.controller.resource.UserResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

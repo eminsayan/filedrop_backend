@@ -12,11 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id; // Todo: UUID tipinde olsun id'ler
+public class User extends BaseEntity {
 
     @Column(unique = true, nullable = false)
     private String username;
